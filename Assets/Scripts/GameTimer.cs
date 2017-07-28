@@ -10,7 +10,7 @@ public class GameTimer : MonoBehaviour
 
     void Awake()
     {
-        timerText = GameObject.FindGameObjectWithTag("GameTimer").GetComponent<Text>();
+        timerText = this.GetComponent<Text>();
     }
 
 
