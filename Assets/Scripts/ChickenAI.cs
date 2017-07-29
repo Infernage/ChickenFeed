@@ -4,7 +4,7 @@ using UnityEngine;
 public class ChickenAI : MonoBehaviour {
     public float speed, feedSpeed;
     public Vector2 min, max;
-    public Sprite sprite; // TODO: Change sprites while moving (?)
+    public SpriteRenderer sprite; // TODO: Change sprites while moving (?)
 
     private Vector2 location;
     private float nextTimeMoving, currentTime, distance;
@@ -26,14 +26,15 @@ public class ChickenAI : MonoBehaviour {
         // Reached position: Calculate next movement
         if (distance < 0.1F && !isFeed)
         {
-            nextTimeMoving = UnityEngine.Random.Range(0, 10) + currentTime;
-            location.x = UnityEngine.Random.Range(min.x, max.x);
-            location.y = UnityEngine.Random.Range(min.y, max.y);
+            Recalculate();
         }
         else if (isFeed && mFeed.RemainingTime <= 0) // Feed consumed
         {
             isFeed = false;
-            nextTimeMoving = 0;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().isKinematic = true;
+
+            Recalculate();
         }
         else if (isFeed)
         {
@@ -43,8 +44,10 @@ public class ChickenAI : MonoBehaviour {
         // Time reached: Start moving
         if (nextTimeMoving <= currentTime && distance >= 0.1F && !isFeed)
         {
-            transform.Translate((location - new Vector2(transform.position.x, transform.position.y)).normalized
-                                * speed * Time.deltaTime);
+            Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
+            transform.Translate(vDistance.normalized * speed * Time.deltaTime);
+
+            RefreshSprite(vDistance);
         }
 	}
 
@@ -54,8 +57,28 @@ public class ChickenAI : MonoBehaviour {
         {
             Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
             Vector2 velocity = vDistance.normalized * feedSpeed;
-
             GetComponent<Rigidbody2D>().velocity = velocity;
+
+            RefreshSprite(vDistance);
+        }
+    }
+
+    private void Recalculate()
+    {
+        nextTimeMoving = UnityEngine.Random.Range(0, 10) + currentTime;
+        location.x = UnityEngine.Random.Range(min.x, max.x);
+        location.y = UnityEngine.Random.Range(min.y, max.y);
+    }
+
+    private void RefreshSprite(Vector2 vDistance)
+    {
+        if (vDistance.x < 0)
+        {
+            // TODO: Set sprite to look at left
+        }
+        else
+        {
+            // TODO: Set sprite to look at right
         }
     }
 
@@ -69,6 +92,21 @@ public class ChickenAI : MonoBehaviour {
         isFeed = true;
         location = feed.Location;
         nextTimeMoving = 0;
+
+        GetComponent<Rigidbody2D>().isKinematic = false;
+
+        // TODO: Play animation and sound
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            // TODO: Play animation and sound
+            /*sprite.enabled = false;
+            enabled = false;*/
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
