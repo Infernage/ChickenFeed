@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 114345103986330238}
   m_Layer: 5
   m_Name: RankingPanel
-  m_TagString: Untagged
+  m_TagString: Ranking
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

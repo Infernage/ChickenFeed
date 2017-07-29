@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 114331572372551340}
   - component: {fileID: 50579182933949200}
   - component: {fileID: 61163085506256102}
+  - component: {fileID: 95735382203578728}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -201,7 +202,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.71, y: 6.02}
+    oldSize: {x: 4.94, y: 10.24}
     newSize: {x: 2.71, y: 6.02}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -260,6 +261,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.283513, y: 9.490419}
   m_EdgeRadius: 0
+--- !u!95 &95735382203578728
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1598385626245134}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea979bcea3fb27f45ad39b357909b75c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114331572372551340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -285,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 114331572372551340}
   trackGameObject: {fileID: 1402926927853784}
+  isRunning: 0
 --- !u!114 &114832713442731432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +400,7 @@ SpriteRenderer:
   m_SortingLayerID: -1520442935
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e74dea5a06cc9ad44b9dc71db5100345, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e581f4ea6812704bb72c9f168bfabc2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
