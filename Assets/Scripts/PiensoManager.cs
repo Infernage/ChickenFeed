@@ -27,7 +27,7 @@ public class PiensoManager : MonoBehaviour {
     {
         if (FeedAmount < MaximumFeed)
         {
-            Feed FeedPointer = new Feed(InitialLocation);
+            Feed FeedPointer = new Feed();
             FeedList.Add(FeedPointer);
             FeedAmount++;
             return FeedPointer;
@@ -65,11 +65,7 @@ public class PiensoManager : MonoBehaviour {
 
     protected virtual void OnFeedKilled(FeedKillEventArgs e)
     {
-        EventHandler<FeedKillEventArgs> handler = FeedKilled;
-        if (handler != null)
-        {
-            handler(this, e);
-        }
+        FeedKilled?.Invoke(this, e);
     }
 }
 

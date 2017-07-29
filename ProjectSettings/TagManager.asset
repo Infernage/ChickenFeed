@@ -44,3 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 184897717
+    locked: 0
+  - name: Enemy Track
+    uniqueID: 4047956271
+    locked: 0
+  - name: Enemy
+    uniqueID: 2774524361
+    locked: 0
