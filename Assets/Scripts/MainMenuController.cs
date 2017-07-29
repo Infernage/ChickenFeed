@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    private GameObject MainPanel, RankingPanel, CreditsPanel;
+    private GameObject Panel, MainPanel, RankingPanel, CreditsPanel;
 
     void Awake()
     {
         MainPanel = GameObject.Find("MainPanel");
         RankingPanel = GameObject.Find("RankingPanel");
         CreditsPanel = GameObject.Find("CreditsPanel");
+        Panel = GameObject.Find("Panel");
         CreditsPanel.SetActive(false);
         RankingPanel.SetActive(false);
     }
@@ -23,8 +24,14 @@ public class MainMenuController : MonoBehaviour
 
     public void ShowCredits()
     {
-        MainPanel.SetActive(false);
+        Panel.SetActive(false);
         CreditsPanel.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        CreditsPanel.SetActive(false);
+        Panel.SetActive(true);
     }
 
     public void ExitGame()
