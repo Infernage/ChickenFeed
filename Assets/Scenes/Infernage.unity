@@ -253,11 +253,6 @@ Prefab:
       propertyPath: attack
       value: 
       objectReference: {fileID: 1363164280}
-    - target: {fileID: 114682739579202186, guid: 66cdd53ee4ef37a4c91b844850729918,
-        type: 2}
-      propertyPath: numberOfChickens
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66cdd53ee4ef37a4c91b844850729918, type: 2}
   m_IsPrefabParent: 0

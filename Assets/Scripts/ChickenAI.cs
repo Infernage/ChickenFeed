@@ -60,13 +60,8 @@ public class ChickenAI : MonoBehaviour {
         {
             Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
             Vector2 velocity = vDistance.normalized * feedSpeed;
-            Vector2 predicted = new Vector2(transform.position.x, transform.position.y) + velocity * Time.fixedDeltaTime;
-            Vector2 pDistance = location - predicted;
-            Debug.Log(pDistance.magnitude);
-            if (pDistance.magnitude < 1) velocity = location;
-            GetComponent<Rigidbody2D>().velocity = velocity;
-
-            // TODO: Fix weird movement
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
 
             RefreshSprite(vDistance);
         }
@@ -90,7 +85,7 @@ public class ChickenAI : MonoBehaviour {
                 transform.GetChild(i).localScale = new Vector3(-1, 1, 1);
             }
         }
-        else if (vDistance.x >= 0 && transform.localScale.magnitude < 0)
+        else if (vDistance.x >= 0)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
