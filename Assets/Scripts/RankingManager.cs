@@ -37,7 +37,7 @@ public class RankingManager : MonoBehaviour
         obj.transform.SetParent(scores.transform, false);
         obj.layer = LayerMask.NameToLayer("UI");
         Text txt = obj.AddComponent<Text>();
-        Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "showcardGothic.ttf");
         txt.font = ArialFont;
         txt.material = ArialFont.material;
         txt.resizeTextForBestFit = true;

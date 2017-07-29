@@ -108,48 +108,6 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &30299542
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539018371535964, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 6b58149f234d7514bb71960beaa4a1e7, type: 2}
-  m_IsPrefabParent: 0
 --- !u!224 &93811421 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224032592025514328, guid: cec4c6f8ea4536547abb9ac34d10d34b,
@@ -172,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &180907532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +303,27 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114096547065160072, guid: cec4c6f8ea4536547abb9ac34d10d34b,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 41231f04c8652584bb11e12faa079390,
+        type: 3}
+    - target: {fileID: 114096547065160072, guid: cec4c6f8ea4536547abb9ac34d10d34b,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114096547065160072, guid: cec4c6f8ea4536547abb9ac34d10d34b,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114096547065160072, guid: cec4c6f8ea4536547abb9ac34d10d34b,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cec4c6f8ea4536547abb9ac34d10d34b, type: 2}
