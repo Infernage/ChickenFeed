@@ -7,6 +7,10 @@ public class ChickenGenerator : MonoBehaviour {
     public float x, y;
     public GameObject ChickenPrefab;
 
+    AudioSource audioSourceDie,audioSourceRush,audioSourceIDLE;
+    AudioClip AudioRushing, AudioDying, AudioIDLE;
+    List<AudioClip> ListAudiosRushing, ListAudiosDying;
+
     private List<GameObject> chickens;
 
 	// Use this for initialization
@@ -15,18 +19,49 @@ public class ChickenGenerator : MonoBehaviour {
 
         chickens = new List<GameObject>();
 
+        audioSourceDie = GetComponents<AudioSource>()[0];
+        audioSourceRush = GetComponents<AudioSource>()[1];
+        audioSourceIDLE = GetComponents<AudioSource>()[2];
+
+        ListAudiosRushing = new List<AudioClip>();
+        ListAudiosDying = new List<AudioClip>();
+
+        ListAudiosRushing.Add(Resources.Load("Audio/Gallina rushing 1") as AudioClip);
+        ListAudiosRushing.Add(Resources.Load("Audio/Gallina rushing 2") as AudioClip);
+        ListAudiosRushing.Add(Resources.Load("Audio/Gallina rushing") as AudioClip);
+        ListAudiosDying.Add(Resources.Load("Audio/Gallina dying 1") as AudioClip);
+        ListAudiosDying.Add(Resources.Load("Audio/Gallina dying 2") as AudioClip);
+
+        AudioIDLE = Resources.Load("Audio/Gallina IDLE") as AudioClip;
+
         for (int i = 0; i < numberOfChickens; i++)
         {
             GameObject chicken = Instantiate(ChickenPrefab, new Vector3(Random.Range(-x, x), Random.Range(-y, y)), Quaternion.identity);
             ChickenAI ai = chicken.GetComponent<ChickenAI>();
             ai.destroyed += Ai_destroyed;
+            ai.feedSpoted += Ai_feedSpoted;
             chickens.Add(chicken);
         }
 	}
 
+    private void Ai_feedSpoted(object sender, System.EventArgs e)
+    {
+        if (!audioSourceRush.isPlaying)
+        {
+            Debug.Log("PlayRush");
+            audioSourceRush.PlayOneShot(ListAudiosRushing[Random.Range(0,2)], 0.5f);
+        }
+    }
+
     private void Ai_destroyed(object sender, System.EventArgs e)
     {
         chickens.Remove(sender as GameObject);
+
+        if(!audioSourceDie.isPlaying)
+        {
+            Debug.Log("PlayDie");
+            audioSourceDie.PlayOneShot(ListAudiosDying[Random.Range(0,1)],0.5f);
+        }
 
         if (chickens.Count == 0)
         {
@@ -36,6 +71,9 @@ public class ChickenGenerator : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+        if (!audioSourceIDLE.isPlaying && chickens.Count > 0)
+        {
+            audioSourceIDLE.PlayOneShot(AudioIDLE,0.2f);
+        }
+    }
 }

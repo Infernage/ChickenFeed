@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceFeedWithMouse : MonoBehaviour {
+[RequireComponent(typeof(AudioSource))]
+public class PlaceFeedWithMouse : MonoBehaviour
+{
 
     public float surfaceOffset = 1.5f;
 
@@ -11,9 +13,14 @@ public class PlaceFeedWithMouse : MonoBehaviour {
     Texture2D HandClosed;
     Texture2D HandOpen;
 
+    public AudioClip AudioDropFeed;
+    AudioSource audioSource;
+    bool AudioFlag;
+
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         feedManager = gameObject.AddComponent<PiensoManager>();
 
@@ -21,18 +28,37 @@ public class PlaceFeedWithMouse : MonoBehaviour {
         HandClosed = Resources.Load("Sprites/Hand_Closed") as Texture2D;
         HandOpen = Resources.Load("Sprites/Hand_Open") as Texture2D;
 
+        AudioDropFeed = Resources.Load("Audio/Click soltar") as AudioClip;
+        audioSource = GetComponent<AudioSource>();
+
+        AudioFlag = false;
+
+
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
 
         if (!Input.GetMouseButton(0))
         {
             Cursor.SetCursor(HandClosed, Vector2.zero, CursorMode.Auto);
+            AudioFlag = false;
             return;
         }
-        Cursor.SetCursor(HandOpen, Vector2.zero, CursorMode.Auto);
+        else
+        {
+            Cursor.SetCursor(HandOpen, Vector2.zero, CursorMode.Auto);
+
+            if (!AudioFlag)
+            {
+                audioSource.PlayOneShot(AudioDropFeed, 0.7F);
+                
+                AudioFlag = true;
+            }
+
+        }
 
         if (!Input.GetMouseButtonDown(0))
         {
@@ -44,8 +70,11 @@ public class PlaceFeedWithMouse : MonoBehaviour {
             return;
         }
 
+        Debug.Log("Click coords:" + hit.point + hit.normal);
+
+
         feedManager.AddPienso(hit.point + hit.normal);
-        
+
 
     }
 }
