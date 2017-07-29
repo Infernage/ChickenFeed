@@ -61,6 +61,9 @@ public class RankingManager : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/data.dat", FileMode.Open);
             rankings = (List<Ranking>)bf.Deserialize(file);
             file.Close();
+        } else
+        {
+            rankings = new List<Ranking>();
         }
     }
 
