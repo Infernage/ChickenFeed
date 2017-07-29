@@ -52,6 +52,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4775055551548568}
   - component: {fileID: 95112558953783466}
+  - component: {fileID: 50547980179013914}
+  - component: {fileID: 114950673773281276}
+  - component: {fileID: 70029733968093506}
   m_Layer: 0
   m_Name: AnimatedChicken
   m_TagString: Untagged
@@ -456,7 +459,7 @@ Transform:
   m_GameObject: {fileID: 1117322572755230}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 4942121825145176}
   - {fileID: 4970805386489370}
@@ -547,6 +550,41 @@ Transform:
   m_Father: {fileID: 4775055551548568}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50547980179013914
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117322572755230}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!70 &70029733968093506
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117322572755230}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.6236871}
+  m_Size: {x: 4.288953, y: 7.350691}
+  m_Direction: 0
 --- !u!95 &95112558953783466
 Animator:
   serializedVersion: 3
@@ -564,6 +602,26 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114950673773281276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117322572755230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543f7c43e92707b4097c4a41d852187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  feedSpeed: 10
+  min: {x: -6.36, y: -5}
+  max: {x: 6.36, y: 5}
+  sprite: {fileID: 0}
+  featherWhite: {fileID: 1806574674035646, guid: 5cb4c1ebf4749834db968565cc184b7c,
+    type: 2}
+  featherYellow: {fileID: 1008643050807384, guid: cba24875be761bf4ca1d8f8af3fdc89b,
+    type: 2}
 --- !u!212 &212285676125569550
 SpriteRenderer:
   m_ObjectHideFlags: 1

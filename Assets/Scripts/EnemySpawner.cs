@@ -27,12 +27,9 @@ public class EnemySpawner : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (minTime > 0)
-        {
-            minTime -= decreaseBySec * Time.deltaTime;
-            maxTime -= decreaseBySec * Time.deltaTime;
-        }
-	}
+        if (minTime > 0) minTime -= decreaseBySec * Time.deltaTime;
+        if (maxTime > 1) maxTime -= decreaseBySec * Time.deltaTime;
+    }
 
     void Spawn()
     {
