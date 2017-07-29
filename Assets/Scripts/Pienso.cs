@@ -6,22 +6,14 @@ public class Feed : MonoBehaviour {
 
     public float FeedLifeTime=10.0f;
     public float RemainingTime;
-    Vector2 Location=new Vector2(0,0);
+    public Vector2 Location=new Vector2(0,0);
 
     public Sprite FeedSprite;   
-
-    public Feed(Vector2 InitialLocation)
-    {
-        Location = InitialLocation;
-        this.transform.position = Location;
-        //FeedSprite = something.something;
-
-    }
 
 	// Use this for initialization
 	void Start () {
         RemainingTime = FeedLifeTime;
-
+        transform.position = Location;
 	}
 
 
@@ -35,5 +27,12 @@ public class Feed : MonoBehaviour {
     {
         //GC logic
      
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger entered!");
+        ChickenAI ai = other.GetComponentInParent<ChickenAI>();
+        ai.FeedSpoted(this);
     }
 }
