@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ChickenAI : MonoBehaviour {
     public event EventHandler destroyed;
+    public event EventHandler feedSpoted;
 
     public float speed, feedSpeed;
     public Vector2 min, max;
@@ -99,6 +100,8 @@ public class ChickenAI : MonoBehaviour {
     /// <param name="feed">The feed in range</param>
     public void FeedSpoted(Pienso feed)
     {
+        feedSpoted?.Invoke(gameObject, new EventArgs());
+
         mFeed = feed;
         isFeed = true;
         location = feed.Location;
