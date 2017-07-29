@@ -72,7 +72,7 @@ public class PiensoManager : MonoBehaviour {
             Debug.Log("Algo para borrar");
 
 
-            GameObject PS_1 = (GameObject)Resources.Load("Prefabs/PS_Feather_1");
+           /* GameObject PS_1 = (GameObject)Resources.Load("Prefabs/PS_Feather_1");
             GameObject PS_2 = (GameObject)Resources.Load("Prefabs/PS_Feather_2");
 
             //PS_1.GetComponent<ParticleSystem>().Play();
@@ -81,7 +81,7 @@ public class PiensoManager : MonoBehaviour {
             GameObject PS_Pointer = Instantiate(PS_1);
             GameObject PS_Pointer_2 = Instantiate(PS_2);
             PS_Pointer.GetComponent<ParticleSystem>().Play();
-            PS_Pointer_2.GetComponent<ParticleSystem>().Play();
+            PS_Pointer_2.GetComponent<ParticleSystem>().Play();*/
 
         }
 
