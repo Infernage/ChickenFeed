@@ -7,19 +7,18 @@ public class ChickenAI : MonoBehaviour {
 
     public float speed, feedSpeed;
     public Vector2 min, max;
-    public SpriteRenderer sprite; // TODO: Change sprites while moving (?)
     public GameObject featherWhite, featherYellow;
 
     private Vector2 location;
     private float nextTimeMoving, currentTime, distance;
-    private bool isFeed;
+    private bool isFeed, feedReached;
     private Pienso mFeed;
 
 	// Use this for initialization
 	void Start () {
         nextTimeMoving = currentTime = 0;
         location = transform.position;
-        isFeed = false;
+        isFeed = feedReached = false;
 	}
 	
 	// Update is called once per frame
@@ -34,15 +33,11 @@ public class ChickenAI : MonoBehaviour {
         }
         else if (isFeed && mFeed.RemainingTime <= 0) // Feed consumed
         {
-            isFeed = false;
+            isFeed = feedReached = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().isKinematic = true;
 
             Recalculate(true);
-        }
-        else if (isFeed)
-        {
-            // TODO: Play feeding animation (?) (use another trigger for range)
         }
 
         // Time reached: Start moving
@@ -57,7 +52,8 @@ public class ChickenAI : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (nextTimeMoving <= currentTime && distance >= 0.1F && isFeed)
+        // Feed spotted: Run for your food!
+        if (nextTimeMoving <= currentTime && distance >= 0.1F && isFeed && !feedReached)
         {
             Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
             Vector2 velocity = vDistance.normalized * feedSpeed;
@@ -75,6 +71,7 @@ public class ChickenAI : MonoBehaviour {
         location.y = UnityEngine.Random.Range(min.y, max.y);
 
         GetComponent<Animator>().SetBool("Running", false);
+        GetComponent<Animator>().SetBool("Eat", false);
     }
 
     private void RefreshSprite(Vector2 vDistance)
@@ -127,7 +124,7 @@ public class ChickenAI : MonoBehaviour {
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            // TODO: Play animation and sound
+            // TODO: Play sound
             SpawnFeathers(featherWhite);
             SpawnFeathers(featherYellow);
 
@@ -139,7 +136,26 @@ public class ChickenAI : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Pienso feed = other.gameObject.GetComponent<Pienso>();
-        if (feed != null) FeedSpoted(feed);
+        if (other.tag.Equals("Feed"))
+        {
+            Debug.Log("ENTERED");
+            feedReached = true;
+            GetComponent<Animator>().SetBool("Eat", true);
+        }
+        else
+        {
+            Pienso feed = other.gameObject.GetComponent<Pienso>();
+            if (feed != null) FeedSpoted(feed);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag.Equals("Feed"))
+        {
+            Debug.Log("EXITED");
+            feedReached = false;
+            GetComponent<Animator>().SetBool("Eat", false);
+        }
     }
 }
