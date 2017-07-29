@@ -94,6 +94,10 @@ MonoBehaviour:
   min: {x: -6.36, y: -5}
   max: {x: 6.36, y: 5}
   sprite: {fileID: 0}
+  featherWhite: {fileID: 1806574674035646, guid: 5cb4c1ebf4749834db968565cc184b7c,
+    type: 2}
+  featherYellow: {fileID: 1008643050807384, guid: cba24875be761bf4ca1d8f8af3fdc89b,
+    type: 2}
 --- !u!212 &212024648818889450
 SpriteRenderer:
   m_ObjectHideFlags: 1

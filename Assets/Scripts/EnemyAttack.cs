@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour {
+    public event System.EventHandler stopped;
 
     public Enemy enemy;
     public GameObject trackGameObject;
+    public bool isRunning;
 
     private BoxCollider2D _enemySpawnArea;
     private EnemyAttackAliveArea _enemyAttackAliveArea;
@@ -13,6 +15,7 @@ public class EnemyAttack : MonoBehaviour {
     void Start()
     {
         trackGameObject.SetActive(false);
+        isRunning = false;
     }
 
     // Use this for initialization
@@ -39,6 +42,7 @@ public class EnemyAttack : MonoBehaviour {
 
     public void Run()
     {
+        isRunning = true;
         trackGameObject.SetActive(true);
 
         var randomPoint = GetRandomPoint();
@@ -57,5 +61,8 @@ public class EnemyAttack : MonoBehaviour {
     {
         trackGameObject.SetActive(false);
         enemy.SetActive(false);
+        isRunning = false;
+
+        stopped?.Invoke(this, new System.EventArgs());
     }
 }

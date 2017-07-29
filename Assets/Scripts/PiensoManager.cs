@@ -69,9 +69,6 @@ public class PiensoManager : MonoBehaviour {
             args.FeedAmount = FeedAmount;
             OnFeedKilled(args);
 
-            Debug.Log("Algo para borrar");
-
-
            /* GameObject PS_1 = (GameObject)Resources.Load("Prefabs/PS_Feather_1");
             GameObject PS_2 = (GameObject)Resources.Load("Prefabs/PS_Feather_2");
 

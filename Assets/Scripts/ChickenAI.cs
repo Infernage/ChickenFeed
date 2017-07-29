@@ -2,9 +2,12 @@
 using UnityEngine;
 
 public class ChickenAI : MonoBehaviour {
+    public event EventHandler destroyed;
+
     public float speed, feedSpeed;
     public Vector2 min, max;
     public SpriteRenderer sprite; // TODO: Change sprites while moving (?)
+    public GameObject featherWhite, featherYellow;
 
     private Vector2 location;
     private float nextTimeMoving, currentTime, distance;
@@ -34,7 +37,7 @@ public class ChickenAI : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().isKinematic = true;
 
-            Recalculate();
+            Recalculate(true);
         }
         else if (isFeed)
         {
@@ -63,9 +66,9 @@ public class ChickenAI : MonoBehaviour {
         }
     }
 
-    private void Recalculate()
+    private void Recalculate(bool wasFeed = false)
     {
-        nextTimeMoving = UnityEngine.Random.Range(0, 10) + currentTime;
+        nextTimeMoving = (wasFeed ? UnityEngine.Random.Range(0, 1) : UnityEngine.Random.Range(0, 10)) + currentTime;
         location.x = UnityEngine.Random.Range(min.x, max.x);
         location.y = UnityEngine.Random.Range(min.y, max.y);
     }
@@ -80,6 +83,14 @@ public class ChickenAI : MonoBehaviour {
         {
             // TODO: Set sprite to look at right
         }
+    }
+
+    private void SpawnFeathers(GameObject original)
+    {
+        GameObject feathers = Instantiate(original, transform.position, Quaternion.identity);
+        ParticleSystem ps = feathers.GetComponent<ParticleSystem>();
+        float duration = ps.main.duration + ps.startLifetime;
+        Destroy(feathers, duration);
     }
 
     /// <summary>
@@ -103,8 +114,11 @@ public class ChickenAI : MonoBehaviour {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             // TODO: Play animation and sound
-            /*sprite.enabled = false;
-            enabled = false;*/
+            SpawnFeathers(featherWhite);
+            SpawnFeathers(featherYellow);
+
+            destroyed?.Invoke(gameObject, new EventArgs());
+
             Destroy(gameObject);
         }
     }

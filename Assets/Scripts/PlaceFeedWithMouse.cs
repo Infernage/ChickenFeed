@@ -44,9 +44,6 @@ public class PlaceFeedWithMouse : MonoBehaviour {
             return;
         }
 
-        Debug.Log("Click coords:" + hit.point + hit.normal);
-
-
         feedManager.AddPienso(hit.point + hit.normal);
         
 
