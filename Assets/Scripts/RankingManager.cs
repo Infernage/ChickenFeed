@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.UI;
 
 public class RankingManager : MonoBehaviour
@@ -12,17 +13,17 @@ public class RankingManager : MonoBehaviour
 
     void Awake()
     {
-        //rankings = new List<Ranking>();
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    Ranking ranking = new Ranking();
-        //    ranking.Time = i.ToString();
-        //    ranking.Name = i.ToString();
-        //    rankings.Add(ranking);
-        //}
-        //Save();
         Load();
         scores = GetComponentInChildren<GridLayoutGroup>();
+        LoadRankingUI();
+    }
+
+    private void LoadRankingUI()
+    {
+        foreach (Transform child in scores.transform)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (var ranking in rankings)
         {
             createRankingRow(ranking.Name);
@@ -61,5 +62,25 @@ public class RankingManager : MonoBehaviour
             rankings = (List<Ranking>)bf.Deserialize(file);
             file.Close();
         }
+    }
+
+    public void InsertNewScore(string name, string time, float timer)
+    {
+        Ranking newRank = new Ranking();
+        newRank.Name = name;
+        newRank.Time = time;
+        newRank.Timer = timer;
+        if (rankings.Count <= 10)
+        {
+            rankings.Add(newRank);
+        }
+        else
+        {
+            float minimun = rankings.Min(m => m.Timer);
+            var minRank = rankings.Where(w => w.Timer == minimun && w.Timer < timer).First();
+            rankings.Remove(minRank);
+            rankings.Add(newRank);
+        }
+        Save();
     }
 }

@@ -8,4 +8,5 @@ public class Ranking
 {
     public string Name { get; set; }
     public string Time { get; set; }
+    public float Timer { get; set; }
 }
