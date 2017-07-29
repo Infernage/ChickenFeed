@@ -42,7 +42,7 @@ public class ChickenAI : MonoBehaviour {
         }
         else if (isFeed)
         {
-            // TODO: Play feeding animation (?)
+            // TODO: Play feeding animation (?) (use another trigger for range)
         }
 
         // Time reached: Start moving
@@ -61,7 +61,13 @@ public class ChickenAI : MonoBehaviour {
         {
             Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
             Vector2 velocity = vDistance.normalized * feedSpeed;
+            Vector2 predicted = new Vector2(transform.position.x, transform.position.y) + velocity * Time.fixedDeltaTime;
+            Vector2 pDistance = location - predicted;
+            Debug.Log(pDistance.magnitude);
+            if (pDistance.magnitude < 1) velocity = location;
             GetComponent<Rigidbody2D>().velocity = velocity;
+
+            // TODO: Fix weird movement
 
             RefreshSprite(vDistance);
         }
@@ -72,18 +78,28 @@ public class ChickenAI : MonoBehaviour {
         nextTimeMoving = (wasFeed ? UnityEngine.Random.Range(0, 1) : UnityEngine.Random.Range(0, 10)) + currentTime;
         location.x = UnityEngine.Random.Range(min.x, max.x);
         location.y = UnityEngine.Random.Range(min.y, max.y);
+
+        GetComponent<Animator>().SetBool("Running", false);
     }
 
     private void RefreshSprite(Vector2 vDistance)
     {
         if (vDistance.x < 0)
         {
-            // TODO: Set sprite to look at left
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).localScale = new Vector3(-1, 1, 1);
+            }
         }
-        else
+        else if (vDistance.x >= 0 && transform.localScale.magnitude < 0)
         {
-            // TODO: Set sprite to look at right
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).localScale = Vector3.one;
+            }
         }
+
+        GetComponent<Animator>().SetBool("Running", true);
     }
 
     private void SpawnFeathers(GameObject original)
