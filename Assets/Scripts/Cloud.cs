@@ -28,7 +28,7 @@ public class Cloud : MonoBehaviour
 
     void Start()
     {
-        Invoke("CloudDestroy", 20);
+        Invoke("CloudDestroy", 100);
     }
 
     private void CloudDestroy()
