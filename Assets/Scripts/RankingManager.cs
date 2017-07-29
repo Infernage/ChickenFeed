@@ -37,7 +37,6 @@ public class RankingManager : MonoBehaviour
         obj.transform.SetParent(scores.transform, false);
         obj.layer = LayerMask.NameToLayer("UI");
         Text txt = obj.AddComponent<Text>();
-        //Font customFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
         Font customFont = (Font)Resources.Load("Font/showcardGothic");
         txt.font = customFont;
         txt.material = customFont.material;
@@ -71,7 +70,7 @@ public class RankingManager : MonoBehaviour
         newRank.Name = name;
         newRank.Time = time;
         newRank.Timer = timer;
-        if (rankings.Count <= 10)
+        if (rankings.Count <= 5)
         {
             rankings.Add(newRank);
         }
