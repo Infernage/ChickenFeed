@@ -14,9 +14,17 @@ public class ChickenAI : MonoBehaviour {
     private float nextTimeMoving, currentTime, distance;
     private bool isFeed;
     private Pienso mFeed;
+    private Animator animator;
+    private float initialXScale;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    // Use this for initialization
+    void Start () {
+        initialXScale = transform.localScale.x;
         nextTimeMoving = currentTime = 0;
         location = transform.position;
         isFeed = false;
@@ -44,6 +52,8 @@ public class ChickenAI : MonoBehaviour {
         {
             // TODO: Play feeding animation (?) (use another trigger for range)
         }
+
+        animator.SetBool("Eat", isFeed);
 
         // Time reached: Start moving
         if (nextTimeMoving <= currentTime && distance >= 0.1F && !isFeed)
@@ -74,27 +84,18 @@ public class ChickenAI : MonoBehaviour {
         location.x = UnityEngine.Random.Range(min.x, max.x);
         location.y = UnityEngine.Random.Range(min.y, max.y);
 
-        GetComponent<Animator>().SetBool("Running", false);
+        animator.SetBool("Running", false);
     }
 
     private void RefreshSprite(Vector2 vDistance)
     {
-        if (vDistance.x < 0)
-        {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).localScale = new Vector3(-1, 1, 1);
-            }
-        }
-        else if (vDistance.x >= 0)
-        {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).localScale = Vector3.one;
-            }
-        }
+        transform.localScale =
+            new Vector3(
+                (vDistance.x < 0 ? -initialXScale : initialXScale),
+                initialXScale,
+                initialXScale);
 
-        GetComponent<Animator>().SetBool("Running", true);
+        animator.SetBool("Running", true);
     }
 
     private void SpawnFeathers(GameObject original)
@@ -143,3 +144,4 @@ public class ChickenAI : MonoBehaviour {
         if (feed != null) FeedSpoted(feed);
     }
 }
+
