@@ -13,7 +13,7 @@ public class Pienso : MonoBehaviour {
     float TimeShrinkEnd;
     float ShrinkLength;
 
-    Vector3 FinalScale;
+    Vector3 FinalScale, InitialScale;
 
     public SpriteRenderer FeedSpriteRender;   
 
@@ -29,8 +29,7 @@ public class Pienso : MonoBehaviour {
         ShrinkLength = TimeShrinkStart - TimeShrinkEnd;
 
         FinalScale = new Vector3(0, 0, 0);
-
-        Debug.Log("Feed start event");
+        InitialScale = transform.localScale;
     }
 
 
@@ -43,7 +42,7 @@ public class Pienso : MonoBehaviour {
         {
             float ShrinkCovered = (TimeShrinkStart - RemainingTime);
             float ShrinkFraction = ShrinkCovered / ShrinkLength;
-            transform.localScale = Vector3.Lerp(new Vector3(1, 1, 1), FinalScale, ShrinkFraction);
+            transform.localScale = Vector3.Lerp(InitialScale, FinalScale, ShrinkFraction);
         }
 	}
 
