@@ -221,11 +221,11 @@ GameObject:
   - component: {fileID: 1175348583}
   - component: {fileID: 1175348584}
   - component: {fileID: 1175348585}
+  - component: {fileID: 1175348590}
   - component: {fileID: 1175348589}
   - component: {fileID: 1175348588}
   - component: {fileID: 1175348587}
   - component: {fileID: 1175348586}
-  - component: {fileID: 1175348590}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -456,6 +456,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: {fileID: 1363164280}
   maxTime: 20
+  minTime: 5
+  decreaseBySec: 0.2
 --- !u!114 &1363164280 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114797619480896872, guid: 47fb70433d3fd9b44888ca2b104b4a11,

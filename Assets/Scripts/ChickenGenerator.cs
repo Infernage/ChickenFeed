@@ -7,18 +7,35 @@ public class ChickenGenerator : MonoBehaviour {
     public float x, y;
     public GameObject ChickenPrefab;
 
+    private List<GameObject> chickens;
+
 	// Use this for initialization
 	void Start () {
         if (numberOfChickens == 0) numberOfChickens = 20;
 
+        chickens = new List<GameObject>();
+
         for (int i = 0; i < numberOfChickens; i++)
         {
-            Instantiate(ChickenPrefab, new Vector3(Random.Range(-x, x), Random.Range(-y, y)), Quaternion.identity);
+            GameObject chicken = Instantiate(ChickenPrefab, new Vector3(Random.Range(-x, x), Random.Range(-y, y)), Quaternion.identity);
+            ChickenAI ai = chicken.GetComponent<ChickenAI>();
+            ai.destroyed += Ai_destroyed;
+            chickens.Add(chicken);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void Ai_destroyed(object sender, System.EventArgs e)
+    {
+        chickens.Remove(sender as GameObject);
+
+        if (chickens.Count == 0)
+        {
+            // TODO: Load game over
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

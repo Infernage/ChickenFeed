@@ -4,23 +4,48 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
     public EnemyAttack attack;
-    public float maxTime;
+    public float maxTime, minTime, decreaseBySec;
+
+    private bool performInvoke;
 
 	// Use this for initialization
 	void Start () {
-        Invoke("Spawn", 5f);
+        Invoke("Spawn", minTime);
+        performInvoke = false;
+        attack.stopped += Attack_stopped;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    private void Attack_stopped(object sender, System.EventArgs e)
+    {
+        if (performInvoke)
+        {
+            attack.Run();
+            Invoke("Spawn", Random.Range(minTime, maxTime));
+            performInvoke = false;
+        }
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if (minTime > 0)
+        {
+            minTime -= decreaseBySec * Time.deltaTime;
+            maxTime -= decreaseBySec * Time.deltaTime;
+        }
 	}
 
     void Spawn()
     {
         CancelInvoke();
 
-        attack.Run();
-        Invoke("Spawn", Random.Range(0f, maxTime));
+        if (!attack.isRunning)
+        {
+            attack.Run();
+            Invoke("Spawn", Random.Range(minTime, maxTime));
+        }
+        else
+        {
+            performInvoke = true;
+        }
     }
 }

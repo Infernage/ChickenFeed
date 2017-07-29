@@ -13,7 +13,6 @@ public class EnemyAttackAliveArea : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("TriggerExit");
         var enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
