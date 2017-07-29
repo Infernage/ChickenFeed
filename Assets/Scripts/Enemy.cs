@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour {
         SetActive(false);
     }
 
-    void SetActive(bool value)
+    public void SetActive(bool value)
     {
         gameObject.SetActive(value);
     }
@@ -40,10 +40,4 @@ public class Enemy : MonoBehaviour {
             transform.position +
             (transform.up * -50);
     }
-
-    //void OnBecameInvisible()
-    //{
-    //    Debug.Log("Invisible!");
-    //    SetActive(false);
-    //}
 }

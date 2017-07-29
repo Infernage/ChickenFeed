@@ -7,7 +7,8 @@ public class EnemyAttack : MonoBehaviour {
     public Enemy enemy;
     public GameObject trackGameObject;
 
-    private BoxCollider2D _boxCollider2d;
+    private BoxCollider2D _enemySpawnArea;
+    private EnemyAttackAliveArea _enemyAttackAliveArea;
 
     void Start()
     {
@@ -16,16 +17,19 @@ public class EnemyAttack : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        _boxCollider2d = GetComponent<BoxCollider2D>();
+        _enemySpawnArea = GetComponentInChildren<EnemyAttackSpawnArea>().gameObject.GetComponent<BoxCollider2D>();
+        _enemyAttackAliveArea = GetComponentInChildren<EnemyAttackAliveArea>();
         enemy = GetComponentInChildren<Enemy>();
-	}
+
+        _enemyAttackAliveArea.SetEnemyAttack(this);
+    }
 
     Vector2 GetRandomPoint()
     {
         var randomPoint = Random.insideUnitCircle;
         return new Vector2(
-            (_boxCollider2d.bounds.size.x / 2) * randomPoint.x,
-            (_boxCollider2d.bounds.size.y / 2) * randomPoint.y);
+            (_enemySpawnArea.bounds.size.x / 2) * randomPoint.x,
+            (_enemySpawnArea.bounds.size.y / 2) * randomPoint.y);
     }
 
     Quaternion GetRandomRotation()
@@ -33,7 +37,7 @@ public class EnemyAttack : MonoBehaviour {
         return Quaternion.Euler(0, 0, Random.Range(0, 360));
     }
 
-    public void Calc()
+    public void Run()
     {
         trackGameObject.SetActive(true);
 
@@ -47,5 +51,11 @@ public class EnemyAttack : MonoBehaviour {
         trackGameObject.transform.rotation = randomRotation;
 
         enemy.Run();
+    }
+
+    public void Stop()
+    {
+        trackGameObject.SetActive(false);
+        enemy.SetActive(false);
     }
 }
