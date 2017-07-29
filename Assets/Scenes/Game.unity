@@ -418,7 +418,7 @@ MonoBehaviour:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -563,6 +563,30 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114083521231071792, guid: 99a758a3e710b8d4696f9dd6145e64e5,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 41231f04c8652584bb11e12faa079390,
+        type: 3}
+    - target: {fileID: 114085654217098302, guid: 99a758a3e710b8d4696f9dd6145e64e5,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 41231f04c8652584bb11e12faa079390,
+        type: 3}
+    - target: {fileID: 114065654568933326, guid: 99a758a3e710b8d4696f9dd6145e64e5,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 41231f04c8652584bb11e12faa079390,
+        type: 3}
+    - target: {fileID: 114525106181942914, guid: 99a758a3e710b8d4696f9dd6145e64e5,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 41231f04c8652584bb11e12faa079390,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 99a758a3e710b8d4696f9dd6145e64e5, type: 2}
   m_IsPrefabParent: 0
