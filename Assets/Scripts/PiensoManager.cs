@@ -8,8 +8,8 @@ public class PiensoManager : MonoBehaviour {
     // Handler declaration
     public event EventHandler<FeedKillEventArgs> FeedKilled;
 
-    List<Feed> FeedList;
-    List<Feed> FeedToDelete;
+    List<GameObject> FeedList;
+    List<GameObject> FeedToDelete;
 
     const int MaximumFeed = 3;
     int FeedAmount;
@@ -18,16 +18,24 @@ public class PiensoManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        FeedList = new List<Feed>();
-        FeedToDelete = new List<Feed>();
+        FeedList = new List<GameObject>();
+        FeedToDelete = new List<GameObject>();
         FeedAmount = 0;
 	}
 
-    public Feed AddPienso(Vector2 InitialLocation)
+    public GameObject AddPienso(Vector2 InitialLocation)
     {
         if (FeedAmount < MaximumFeed)
         {
-            Feed FeedPointer = new Feed();
+            GameObject pruebaPrefab = (GameObject)Resources.Load("Prefabs/PruebaFeed");
+
+            //Pienso FeedPointer = gameObject.AddComponent<Pienso>();
+
+           GameObject FeedPointer =  Instantiate(pruebaPrefab,InitialLocation,Quaternion.identity);
+            FeedPointer.GetComponent<Pienso>().Location = InitialLocation;
+            FeedPointer.GetComponent<Pienso>().Start();
+            
+            //pruebaPrefab.Location = InitialLocation;
             FeedList.Add(FeedPointer);
             FeedAmount++;
             return FeedPointer;
@@ -41,10 +49,12 @@ public class PiensoManager : MonoBehaviour {
 	void Update () {
 
         //Check if feed has no time remaining
-        foreach(Feed item in FeedList)
+        foreach(GameObject item in FeedList)
         {
-            if(item.RemainingTime<=0.0f)
+            if(item.GetComponent<Pienso>().RemainingTime<=0.0f)
                 FeedToDelete.Add(item);
+
+            //Debug.Log(item.GetComponent<Pienso>().RemainingTime);
         }
 
         for(int i = FeedToDelete.Count-1;i >=0; i--)
@@ -58,6 +68,8 @@ public class PiensoManager : MonoBehaviour {
             FeedKillEventArgs args = new FeedKillEventArgs();
             args.FeedAmount = FeedAmount;
             OnFeedKilled(args);
+
+            Debug.Log("Algo para borrar");
 
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour {
     private ChickenAI[] chickens;
-    private Feed[] feeds;
+    private Pienso[] feeds;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +22,7 @@ public class Test : MonoBehaviour {
             chickens[i].min = new Vector2(-5, -5);
             chickens[i].max = new Vector2(5, 5);
         }
-        feeds = new Feed[3];
+        feeds = new Pienso[3];
         for (int i = 0; i < 3; i++)
         {
             GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -31,7 +31,7 @@ public class Test : MonoBehaviour {
             SphereCollider col = obj.GetComponent<SphereCollider>();
             col.radius = 5;
             col.isTrigger = true;
-            feeds[i] = obj.AddComponent<Feed>();
+            feeds[i] = obj.AddComponent<Pienso>();
             feeds[i].Location = obj.transform.position;
         }
 	}
