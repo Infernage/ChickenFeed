@@ -7,9 +7,9 @@ public class ChickenAI : MonoBehaviour {
     public Sprite sprite; // TODO: Change sprites while moving (?)
 
     private Vector2 location;
-    private float nextTimeMoving, currentTime;
+    private float nextTimeMoving, currentTime, distance;
     private bool isFeed;
-    private Feed mFeed;
+    private Pienso mFeed;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class ChickenAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float distance = Math.Abs(Vector2.Distance(location, transform.position));
+        distance = Math.Abs(Vector2.Distance(location, transform.position));
         currentTime += Time.deltaTime;
 
         // Reached position: Calculate next movement
@@ -41,19 +41,29 @@ public class ChickenAI : MonoBehaviour {
         }
 
         // Time reached: Start moving
-        if (nextTimeMoving <= currentTime && distance >= 0.1F)
+        if (nextTimeMoving <= currentTime && distance >= 0.1F && !isFeed)
         {
             transform.Translate((location - new Vector2(transform.position.x, transform.position.y)).normalized
                                 * speed * Time.deltaTime);
         }
-        //Debug.Log("Distance: " + distance + ", target: " + location + ", location: " + transform.position + ", to move: " + nextTimeMoving + ", current time:" + currentTime);
 	}
+
+    private void FixedUpdate()
+    {
+        if (nextTimeMoving <= currentTime && distance >= 0.1F && isFeed)
+        {
+            Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
+            Vector2 velocity = vDistance.normalized * feedSpeed;
+
+            GetComponent<Rigidbody2D>().velocity = velocity;
+        }
+    }
 
     /// <summary>
     /// Triggers the behaviour to reach the feed location
     /// </summary>
     /// <param name="feed">The feed in range</param>
-    public void FeedSpoted(Feed feed)
+    public void FeedSpoted(Pienso feed)
     {
         mFeed = feed;
         isFeed = true;
@@ -61,8 +71,9 @@ public class ChickenAI : MonoBehaviour {
         nextTimeMoving = 0;
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("JSDHASJDHSA");
+        Pienso feed = other.gameObject.GetComponent<Pienso>();
+        if (feed != null) FeedSpoted(feed);
     }
 }
