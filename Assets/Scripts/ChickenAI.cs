@@ -16,9 +16,13 @@ public class ChickenAI : MonoBehaviour {
     private Animator animator;
     private float initialXScale;
 
+    private CircleCollider2D circleCollider2D;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+
+        circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
     // Use this for initialization
@@ -27,7 +31,11 @@ public class ChickenAI : MonoBehaviour {
         nextTimeMoving = currentTime = 0;
         location = transform.position;
         isFeed = feedReached = false;
-	}
+
+        animator.speed = UnityEngine.Random.Range(0.6F, 1.4F);
+
+        circleCollider2D.radius = UnityEngine.Random.Range(1.6F, 2.5F);
+    }
 	
 	// Update is called once per frame
 	void Update () {
