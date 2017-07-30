@@ -17,10 +17,10 @@ public class CloudGenerator : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= 5)
+        if (timer >= 10)
         {
             int rnd = Random.Range(0, 10);
-            if (rnd == 7 || rnd == 5)
+            if (rnd == 5)
             {
                 Instantiate(clouds, this.transform.position, Quaternion.identity);
             }

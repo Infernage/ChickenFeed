@@ -33,7 +33,7 @@ public class PlaceFeedWithMouse : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         AudioFlag = false;
-        
+
     }
 
     private void FeedManager_FeedKilled(object sender, FeedKillEventArgs e)
@@ -44,7 +44,13 @@ public class PlaceFeedWithMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (GameController.GameFinished)
+        {
+            foreach (var item in feedsUI)
+            {
+                item.SetActive(false);
+            }
+        }
 
         if (!Input.GetMouseButton(0))
         {
@@ -59,7 +65,7 @@ public class PlaceFeedWithMouse : MonoBehaviour
             if (!AudioFlag)
             {
                 audioSource.PlayOneShot(AudioDropFeed, 0.7F);
-                
+
                 AudioFlag = true;
             }
 
