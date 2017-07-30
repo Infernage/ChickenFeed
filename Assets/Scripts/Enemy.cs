@@ -6,7 +6,10 @@ public class Enemy : MonoBehaviour {
 
     public float speed = 30;
 
+    private int marginDistance = 50;
+
     private CameraController _cameraController;
+    private Vector3 initialPosition;
 
     private void Awake()
     {
@@ -29,6 +32,8 @@ public class Enemy : MonoBehaviour {
             (transform.up * speed * Time.deltaTime);
 
         _cameraController.shake = 0.5F;
+        _cameraController.shakeAmount =
+            ((marginDistance - (transform.position - initialPosition).magnitude) / marginDistance) * 0.2F;
     }
 
     public void SetPosition(Vector2 position)
@@ -45,8 +50,10 @@ public class Enemy : MonoBehaviour {
     {
         SetActive(true);
 
+        initialPosition = transform.position;
+
         transform.position =
             transform.position +
-            (transform.up * -50);
+            (transform.up * -marginDistance);
     }
 }
