@@ -32,5 +32,11 @@ public class CameraController : MonoBehaviour
                 shake = 0;
             }
         }
+        else
+        {
+            if (GetComponent<AudioSource>().isPlaying)
+                GetComponent<AudioSource>().Stop();
+        }
+            
     }
 }
