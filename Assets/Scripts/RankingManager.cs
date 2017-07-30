@@ -66,6 +66,7 @@ public class RankingManager : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/data.dat", FileMode.Open);
             rankings = (List<Ranking>)bf.Deserialize(file);
             file.Close();
+            rankings = rankings.OrderByDescending(o => o.Timer).Take(5).ToList();
         }
         else
         {
@@ -83,18 +84,13 @@ public class RankingManager : MonoBehaviour
         {
             Load();
         }
-        if (rankings.Count <= 5)
+        rankings.Add(newRank);
+        if (rankings.Count > 5)
         {
-            rankings.Add(newRank);
-        }
-        else
-        {
-            float minimun = rankings.Min(m => m.Timer);
-            var minRank = rankings.Where(w => w.Timer == minimun && w.Timer < timer).First();
-            rankings.Remove(minRank);
-            rankings.Add(newRank);
+            rankings = rankings.OrderByDescending(o => o.Timer).Take(5).ToList();
         }
         Save();
         Load();
+        LoadRankingUI();
     }
 }
