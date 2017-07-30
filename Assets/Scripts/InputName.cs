@@ -16,7 +16,10 @@ public class InputName : MonoBehaviour
     public void SaveName()
     {
         string name = GetComponentInChildren<Text>().text;
-        name = name.Substring(0, 10);
+        if (name.Length > 10)
+        {
+            name = name.Substring(0, 10);
+        }
         string timerText = gameTimer.GetTimerString();
         float timer = gameTimer.GetTimer();
         rankingManager.GetComponent<RankingManager>().InsertNewScore(name, timerText, timer);

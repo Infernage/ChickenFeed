@@ -51,39 +51,41 @@ public class PlaceFeedWithMouse : MonoBehaviour
                 item.SetActive(false);
             }
         }
+        else {
 
-        if (!Input.GetMouseButton(0))
-        {
-            Cursor.SetCursor(HandClosed, Vector2.zero, CursorMode.Auto);
-            AudioFlag = false;
-            return;
-        }
-        else
-        {
-            Cursor.SetCursor(HandOpen, Vector2.zero, CursorMode.Auto);
-
-            if (!AudioFlag)
+            if (!Input.GetMouseButton(0))
             {
-                audioSource.PlayOneShot(AudioDropFeed, 0.7F);
+                Cursor.SetCursor(HandClosed, Vector2.zero, CursorMode.Auto);
+                AudioFlag = false;
+                return;
+            }
+            else
+            {
+                Cursor.SetCursor(HandOpen, Vector2.zero, CursorMode.Auto);
 
-                AudioFlag = true;
+                if (!AudioFlag)
+                {
+                    audioSource.PlayOneShot(AudioDropFeed, 0.7F);
+
+                    AudioFlag = true;
+                }
+
             }
 
-        }
+            if (!Input.GetMouseButtonDown(0))
+            {
+                return;
+            }
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.collider == null)
+            {
+                return;
+            }
 
-        if (!Input.GetMouseButtonDown(0))
-        {
-            return;
-        }
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hit.collider == null)
-        {
-            return;
-        }
-
-        if (feedManager.AddPienso(hit.point + hit.normal) != null)
-        {
-            feedsUI[feedManager.FeedAmount - 1].SetActive(false);
+            if (feedManager.AddPienso(hit.point + hit.normal) != null)
+            {
+                feedsUI[feedManager.FeedAmount - 1].SetActive(false);
+            }
         }
     }
 }

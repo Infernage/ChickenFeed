@@ -24,7 +24,10 @@ public class RankingManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        rankings = rankings.OrderByDescending(o => o.Timer).Take(5).ToList();
+        if (rankings != null && rankings.Count > 5)
+        {
+            rankings = rankings.OrderByDescending(o => o.Timer).Take(5).ToList();
+        }
         foreach (var ranking in rankings)
         {
             createRankingRow(ranking.Name);
