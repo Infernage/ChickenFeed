@@ -6,6 +6,13 @@ public class Enemy : MonoBehaviour {
 
     public float speed = 30;
 
+    private CameraController _cameraController;
+
+    private void Awake()
+    {
+        _cameraController = FindObjectOfType<CameraController>();
+    }
+
     void Start()
     {
         SetActive(false);
@@ -20,6 +27,8 @@ public class Enemy : MonoBehaviour {
         transform.position =
             transform.position +
             (transform.up * speed * Time.deltaTime);
+
+        _cameraController.shake = 0.5F;
     }
 
     public void SetPosition(Vector2 position)
