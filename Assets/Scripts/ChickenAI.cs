@@ -15,10 +15,12 @@ public class ChickenAI : MonoBehaviour {
     private Pienso mFeed;
     private Animator animator;
     private float initialXScale;
+    private int nFeedsNear;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        nFeedsNear = 0;
     }
 
     // Use this for initialization
@@ -47,8 +49,6 @@ public class ChickenAI : MonoBehaviour {
 
             Recalculate(true);
         }
-
-        animator.SetBool("Eat", isFeed);
 
         // Time reached: Start moving
         if (nextTimeMoving <= currentTime && distance >= 0.1F && !isFeed)
@@ -107,7 +107,7 @@ public class ChickenAI : MonoBehaviour {
     /// Triggers the behaviour to reach the feed location
     /// </summary>
     /// <param name="feed">The feed in range</param>
-    public void FeedSpoted(Pienso feed)
+    private void FeedSpoted(Pienso feed)
     {
         feedSpoted?.Invoke(gameObject, new EventArgs());
 
@@ -139,9 +139,10 @@ public class ChickenAI : MonoBehaviour {
     {
         if (other.tag.Equals("Feed"))
         {
-            Debug.Log("ENTERED");
             feedReached = true;
             animator.SetBool("Eat", true);
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            nFeedsNear++;
         }
         else
         {
@@ -154,9 +155,12 @@ public class ChickenAI : MonoBehaviour {
     {
         if (other.tag.Equals("Feed"))
         {
-            Debug.Log("EXITED");
-            feedReached = false;
-            animator.SetBool("Eat", false);
+            nFeedsNear--;
+            if (nFeedsNear == 0)
+            {
+                feedReached = false;
+                animator.SetBool("Eat", false);
+            }
         }
     }
 }

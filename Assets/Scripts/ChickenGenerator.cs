@@ -48,7 +48,6 @@ public class ChickenGenerator : MonoBehaviour {
     {
         if (!audioSourceRush.isPlaying)
         {
-            Debug.Log("PlayRush");
             audioSourceRush.PlayOneShot(ListAudiosRushing[Random.Range(0,2)], 0.5f);
         }
     }
@@ -59,7 +58,6 @@ public class ChickenGenerator : MonoBehaviour {
 
         if(!audioSourceDie.isPlaying)
         {
-            Debug.Log("PlayDie");
             audioSourceDie.PlayOneShot(ListAudiosDying[Random.Range(0,1)],0.5f);
         }
 

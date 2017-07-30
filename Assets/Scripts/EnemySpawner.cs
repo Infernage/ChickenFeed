@@ -49,7 +49,6 @@ public class EnemySpawner : MonoBehaviour {
             attack.Run();
             Invoke("Spawn", Random.Range(minTime, maxTime));
 
-            Debug.Log("Attack");
             //audioSourceFox.PlayDelayed(1);
         }
         else
