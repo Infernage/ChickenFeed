@@ -91,5 +91,6 @@ public class RankingManager : MonoBehaviour
             rankings.Add(newRank);
         }
         Save();
+        Load();
     }
 }
