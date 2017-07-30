@@ -79,6 +79,10 @@ public class RankingManager : MonoBehaviour
         newRank.Name = name;
         newRank.Time = time;
         newRank.Timer = timer;
+        if (rankings == null)
+        {
+            rankings = new List<Ranking>();
+        }
         if (rankings.Count <= 5)
         {
             rankings.Add(newRank);
