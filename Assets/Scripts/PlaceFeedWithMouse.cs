@@ -9,6 +9,7 @@ public class PlaceFeedWithMouse : MonoBehaviour
     public float surfaceOffset = 1.5f;
 
     public PiensoManager feedManager;
+    public GameObject[] feedsUI;
 
     Texture2D HandClosed;
     Texture2D HandOpen;
@@ -23,7 +24,7 @@ public class PlaceFeedWithMouse : MonoBehaviour
     {
 
         feedManager = gameObject.AddComponent<PiensoManager>();
-
+        feedManager.FeedKilled += FeedManager_FeedKilled;
 
         HandClosed = Resources.Load("Sprites/Hand_Closed") as Texture2D;
         HandOpen = Resources.Load("Sprites/Hand_Open") as Texture2D;
@@ -32,8 +33,12 @@ public class PlaceFeedWithMouse : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         AudioFlag = false;
+        
+    }
 
-
+    private void FeedManager_FeedKilled(object sender, FeedKillEventArgs e)
+    {
+        feedsUI[e.FeedAmount].SetActive(true);
     }
 
     // Update is called once per frame
@@ -70,8 +75,9 @@ public class PlaceFeedWithMouse : MonoBehaviour
             return;
         }
 
-        feedManager.AddPienso(hit.point + hit.normal);
-
-
+        if (feedManager.AddPienso(hit.point + hit.normal) != null)
+        {
+            feedsUI[feedManager.FeedAmount - 1].SetActive(false);
+        }
     }
 }
