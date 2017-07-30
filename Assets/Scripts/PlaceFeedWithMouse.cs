@@ -10,6 +10,7 @@ public class PlaceFeedWithMouse : MonoBehaviour
 
     public PiensoManager feedManager;
     public GameObject[] feedsUI;
+    public LayerMask mask;
 
     Texture2D HandClosed;
     Texture2D HandOpen;
@@ -76,7 +77,8 @@ public class PlaceFeedWithMouse : MonoBehaviour
             {
                 return;
             }
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero,
+                distance: Mathf.Infinity, layerMask: mask);
             if (hit.collider == null)
             {
                 return;

@@ -24,21 +24,49 @@ GameObject:
   - component: {fileID: 114060563481955596}
   - component: {fileID: 114682739579202186}
   - component: {fileID: 114030951549662752}
-  - component: {fileID: 61496409669023732}
-  - component: {fileID: 61355637267676420}
-  - component: {fileID: 61613769952911066}
-  - component: {fileID: 61670090665235144}
   - component: {fileID: 82016037280260602}
   - component: {fileID: 82138314635157208}
   - component: {fileID: 82353656971000580}
   - component: {fileID: 82044656902353504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1739549039743904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4212583774668456}
+  - component: {fileID: 61538488545105170}
+  - component: {fileID: 61797015206242260}
+  - component: {fileID: 61461636633721452}
+  - component: {fileID: 61063052539484368}
+  m_Layer: 0
+  m_Name: Edges
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4212583774668456
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739549039743904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4996326679047716}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4996326679047716
 Transform:
   m_ObjectHideFlags: 1
@@ -48,10 +76,36 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
-  m_Children: []
+  m_Children:
+  - {fileID: 4212583774668456}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61063052539484368
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739549039743904}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 20.952242, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 40, y: 30.000002}
+    newSize: {x: 40, y: 30.000002}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.6319084, y: 30.000002}
+  m_EdgeRadius: 0
 --- !u!61 &61286843225905680
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -77,62 +131,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 40, y: 30.000002}
   m_EdgeRadius: 0
---- !u!61 &61355637267676420
+--- !u!61 &61461636633721452
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540929749102262}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -16.322704}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 40, y: 30.000002}
-    newSize: {x: 40, y: 30.000002}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 40, y: 2.890915}
-  m_EdgeRadius: 0
---- !u!61 &61496409669023732
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540929749102262}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 16.179497}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 40, y: 30.000002}
-    newSize: {x: 40, y: 30.000002}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 40, y: 2.6046534}
-  m_EdgeRadius: 0
---- !u!61 &61613769952911066
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540929749102262}
+  m_GameObject: {fileID: 1739549039743904}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -152,19 +156,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.2497902, y: 30.000002}
   m_EdgeRadius: 0
---- !u!61 &61670090665235144
+--- !u!61 &61538488545105170
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540929749102262}
+  m_GameObject: {fileID: 1739549039743904}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 20.952242, y: 0}
+  m_Offset: {x: 0, y: 16.179497}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -175,7 +179,32 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.6319084, y: 30.000002}
+  m_Size: {x: 40, y: 2.6046534}
+  m_EdgeRadius: 0
+--- !u!61 &61797015206242260
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1739549039743904}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -16.322704}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 40, y: 30.000002}
+    newSize: {x: 40, y: 30.000002}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 40, y: 2.890915}
   m_EdgeRadius: 0
 --- !u!82 &82016037280260602
 AudioSource:
@@ -525,6 +554,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surfaceOffset: 1.5
   feedManager: {fileID: 0}
+  feedsUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 512
   AudioDropFeed: {fileID: 0}
 --- !u!114 &114682739579202186
 MonoBehaviour:
