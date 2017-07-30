@@ -81,7 +81,7 @@ public class RankingManager : MonoBehaviour
         newRank.Timer = timer;
         if (rankings == null)
         {
-            rankings = new List<Ranking>();
+            Load();
         }
         if (rankings.Count <= 5)
         {

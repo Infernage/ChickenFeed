@@ -17,7 +17,7 @@ public class CloudGenerator : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= 10)
+        if (timer >= 15)
         {
             int rnd = Random.Range(0, 10);
             if (rnd == 5)
