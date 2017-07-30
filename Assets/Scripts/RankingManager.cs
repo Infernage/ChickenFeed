@@ -24,6 +24,7 @@ public class RankingManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        rankings = rankings.OrderByDescending(o => o.Timer).Take(5).ToList();
         foreach (var ranking in rankings)
         {
             createRankingRow(ranking.Name);
@@ -43,6 +44,7 @@ public class RankingManager : MonoBehaviour
         txt.resizeTextForBestFit = true;
         txt.fontStyle = FontStyle.Normal;
         txt.text = text;
+        txt.horizontalOverflow = HorizontalWrapMode.Overflow;
     }
 
     public void Save()
@@ -61,7 +63,8 @@ public class RankingManager : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/data.dat", FileMode.Open);
             rankings = (List<Ranking>)bf.Deserialize(file);
             file.Close();
-        } else
+        }
+        else
         {
             rankings = new List<Ranking>();
         }

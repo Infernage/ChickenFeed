@@ -20,7 +20,7 @@ public class CloudGenerator : MonoBehaviour
         if (timer >= 5)
         {
             int rnd = Random.Range(0, 10);
-            if (rnd >= 7)
+            if (rnd == 7 || rnd == 5)
             {
                 Instantiate(clouds, this.transform.position, Quaternion.identity);
             }

@@ -5,20 +5,23 @@ using UnityEngine.UI;
 
 public class InputName : MonoBehaviour
 {
-    private RankingManager rankingManager;
+    public GameObject rankingManager, LosePanel;
     private GameTimer gameTimer;
 
     void Awake()
     {
-        rankingManager = GameObject.FindGameObjectWithTag("Ranking").GetComponent<RankingManager>();
         gameTimer = GameObject.FindGameObjectWithTag("GameTimer").GetComponent<GameTimer>();
     }
 
     public void SaveName()
     {
         string name = GetComponentInChildren<Text>().text;
+        name = name.Substring(0, 10);
         string timerText = gameTimer.GetTimerString();
         float timer = gameTimer.GetTimer();
-        rankingManager.InsertNewScore(name, timerText, timer);
+        rankingManager.GetComponent<RankingManager>().InsertNewScore(name, timerText, timer);
+        rankingManager.SetActive(true);
+        GameObject.Find("Canvas/PanelInputName").SetActive(false);
+        LosePanel.SetActive(true);
     }
 }

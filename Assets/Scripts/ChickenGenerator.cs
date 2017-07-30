@@ -2,21 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenGenerator : MonoBehaviour {
+public class ChickenGenerator : MonoBehaviour
+{
     public int numberOfChickens = 0;
     public float x, y;
     public GameObject ChickenPrefab;
 
     public GameObject LosePanel;
+    private GameObject rankingPanel, inputPanel;
 
-    AudioSource audioSourceDie,audioSourceRush,audioSourceIDLE;
+    AudioSource audioSourceDie, audioSourceRush, audioSourceIDLE;
     AudioClip AudioRushing, AudioDying, AudioIDLE;
     List<AudioClip> ListAudiosRushing, ListAudiosDying;
 
     private List<GameObject> chickens;
 
-	// Use this for initialization
-	void Start () {
+    public void Awake()
+    {
+        rankingPanel = GameObject.Find("Canvas/RankingPanel");
+        inputPanel = GameObject.Find("Canvas/PanelInputName");
+        rankingPanel.SetActive(false);
+        inputPanel.SetActive(false);
+    }
+
+
+    // Use this for initialization
+    void Start()
+    {
         if (numberOfChickens == 0) numberOfChickens = 20;
 
         chickens = new List<GameObject>();
@@ -44,14 +56,14 @@ public class ChickenGenerator : MonoBehaviour {
             ai.feedSpoted += Ai_feedSpoted;
             chickens.Add(chicken);
         }
-	}
+    }
 
     private void Ai_feedSpoted(object sender, System.EventArgs e)
     {
         if (!audioSourceRush.isPlaying)
         {
             Debug.Log("PlayRush");
-            audioSourceRush.PlayOneShot(ListAudiosRushing[Random.Range(0,2)], 0.5f);
+            audioSourceRush.PlayOneShot(ListAudiosRushing[Random.Range(0, 2)], 0.5f);
         }
     }
 
@@ -59,23 +71,26 @@ public class ChickenGenerator : MonoBehaviour {
     {
         chickens.Remove(sender as GameObject);
 
-        if(!audioSourceDie.isPlaying)
+        if (!audioSourceDie.isPlaying)
         {
             Debug.Log("PlayDie");
-            audioSourceDie.PlayOneShot(ListAudiosDying[Random.Range(0,1)],0.5f);
+            audioSourceDie.PlayOneShot(ListAudiosDying[Random.Range(0, 1)], 0.5f);
         }
 
         if (chickens.Count == 0)
         {
-            LosePanel.SetActive(true);
+            GameController.GameFinished = true;
+            GameObject.Find("Canvas/GameTimer").GetComponent<GameTimer>().StopTimer();
+            inputPanel.SetActive(true);
         }
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (!audioSourceIDLE.isPlaying && chickens.Count > 0)
         {
-            audioSourceIDLE.PlayOneShot(AudioIDLE,0.2f);
+            audioSourceIDLE.PlayOneShot(AudioIDLE, 0.2f);
         }
     }
 }

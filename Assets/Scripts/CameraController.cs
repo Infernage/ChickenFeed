@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
     Camera _camera;
 
     public float shake = 0;
@@ -18,15 +19,18 @@ public class CameraController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (shake > 0)
+        if (!GameController.GameFinished)
         {
-            _camera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
-            shake -= Time.deltaTime * decreaseFactor;
-        }
-        else
-        {
-            _camera.transform.localPosition = new Vector3();
-            shake = 0;
+            if (shake > 0)
+            {
+                _camera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
+                shake -= Time.deltaTime * decreaseFactor;
+            }
+            else
+            {
+                _camera.transform.localPosition = new Vector3();
+                shake = 0;
+            }
         }
     }
 }

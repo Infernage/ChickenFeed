@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour {
+public class EnemyAttack : MonoBehaviour
+{
     public event System.EventHandler stopped;
 
     public Enemy enemy;
@@ -19,7 +20,8 @@ public class EnemyAttack : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         _enemySpawnArea = GetComponentInChildren<EnemyAttackSpawnArea>().gameObject.GetComponent<BoxCollider2D>();
         _enemyAttackAliveArea = GetComponentInChildren<EnemyAttackAliveArea>();
         enemy = GetComponentInChildren<Enemy>();
@@ -41,7 +43,8 @@ public class EnemyAttack : MonoBehaviour {
         if (chickens.Length <= 10 && chickens.Length > 0)
         {
             return chickens[Mathf.RoundToInt(Random.Range(0, chickens.Length))].gameObject.transform.position;
-        } else
+        }
+        else
         {
             return GetRandomPoint();
         }
@@ -54,19 +57,22 @@ public class EnemyAttack : MonoBehaviour {
 
     public void Run()
     {
-        isRunning = true;
-        trackGameObject.SetActive(true);
+        if (!GameController.GameFinished)
+        {
+            isRunning = true;
+            trackGameObject.SetActive(true);
 
-        var targetPoint = GetTargetPoint();
-        var randomRotation = GetRandomRotation();
+            var targetPoint = GetTargetPoint();
+            var randomRotation = GetRandomRotation();
 
-        enemy.SetPosition(targetPoint);
-        enemy.SetRotation(randomRotation);
+            enemy.SetPosition(targetPoint);
+            enemy.SetRotation(randomRotation);
 
-        trackGameObject.transform.position = targetPoint;
-        trackGameObject.transform.rotation = randomRotation;
+            trackGameObject.transform.position = targetPoint;
+            trackGameObject.transform.rotation = randomRotation;
 
-        enemy.Run();
+            enemy.Run();
+        }
     }
 
     public void Stop()
