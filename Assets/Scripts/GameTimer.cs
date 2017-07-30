@@ -24,7 +24,7 @@ public class GameTimer : MonoBehaviour
         {
             timer += Time.deltaTime;
             string minutes = Mathf.Floor(timer / 60).ToString("00");
-            string seconds = (timer % 60).ToString("00");
+            string seconds = Mathf.Floor(timer % 60).ToString("00");
             timerText.text = minutes + " : " + seconds;
         }
     }
