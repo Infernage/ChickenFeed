@@ -83,6 +83,10 @@ public class RankingManager : MonoBehaviour
         if (rankings == null)
         {
             Load();
+            if (rankings == null)
+            {
+                rankings = new List<Ranking>();
+            }
         }
         rankings.Add(newRank);
         if (rankings.Count > 5)
