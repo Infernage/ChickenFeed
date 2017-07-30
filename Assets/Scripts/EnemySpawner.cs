@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour {
             Invoke("Spawn", Random.Range(minTime, maxTime));
             performInvoke = false;
 
-            
+            audioSourceFox.Stop();
         }
     }
 
@@ -49,8 +49,8 @@ public class EnemySpawner : MonoBehaviour {
             attack.Run();
             Invoke("Spawn", Random.Range(minTime, maxTime));
 
-            if(!GameController.GameFinished)
-                audioSourceFox.Play();
+            if (!GameController.GameFinished)
+                audioSourceFox.PlayOneShot(AudioFox);
         }
         else
         {
