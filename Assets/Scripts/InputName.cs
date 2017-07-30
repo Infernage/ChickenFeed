@@ -23,8 +23,9 @@ public class InputName : MonoBehaviour
         string timerText = gameTimer.GetTimerString();
         float timer = gameTimer.GetTimer();
         rankingManager.GetComponent<RankingManager>().InsertNewScore(name, timerText, timer);
-        rankingManager.SetActive(true);
         GameObject.Find("Canvas/PanelInputName").SetActive(false);
+        rankingManager.SetActive(true);
         LosePanel.SetActive(true);
+        rankingManager.GetComponent<RankingManager>().LoadRankingUI();
     }
 }

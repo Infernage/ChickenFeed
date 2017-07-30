@@ -1861,6 +1861,11 @@ Prefab:
       propertyPath: feedsUI.Array.data[2]
       value: 
       objectReference: {fileID: 1116369930}
+    - target: {fileID: 114682739579202186, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: numberOfChickens
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 114030951549662752, guid: 66cdd53ee4ef37a4c91b844850729918,
         type: 2}
       propertyPath: attack
