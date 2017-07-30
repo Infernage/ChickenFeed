@@ -35,6 +35,18 @@ public class EnemyAttack : MonoBehaviour {
             (_enemySpawnArea.bounds.size.y / 2) * randomPoint.y);
     }
 
+    Vector2 GetTargetPoint()
+    {
+        var chickens = FindObjectsOfType<ChickenAI>();
+        if (chickens.Length <= 10 && chickens.Length > 0)
+        {
+            return chickens[Mathf.RoundToInt(Random.Range(0, chickens.Length))].gameObject.transform.position;
+        } else
+        {
+            return GetRandomPoint();
+        }
+    }
+
     Quaternion GetRandomRotation()
     {
         return Quaternion.Euler(0, 0, Random.Range(0, 360));
@@ -45,13 +57,13 @@ public class EnemyAttack : MonoBehaviour {
         isRunning = true;
         trackGameObject.SetActive(true);
 
-        var randomPoint = GetRandomPoint();
+        var targetPoint = GetTargetPoint();
         var randomRotation = GetRandomRotation();
 
-        enemy.SetPosition(randomPoint);
+        enemy.SetPosition(targetPoint);
         enemy.SetRotation(randomRotation);
 
-        trackGameObject.transform.position = randomPoint;
+        trackGameObject.transform.position = targetPoint;
         trackGameObject.transform.rotation = randomRotation;
 
         enemy.Run();

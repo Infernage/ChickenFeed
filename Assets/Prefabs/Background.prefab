@@ -47,7 +47,7 @@ Transform:
   m_GameObject: {fileID: 1540929749102262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33600846, y: 0.33600837, z: 0.33600837}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 0}
-  maxTime: 20
+  maxTime: 10
   minTime: 5
   decreaseBySec: 0.2
 --- !u!114 &114060563481955596
@@ -542,6 +542,7 @@ MonoBehaviour:
   y: 5
   ChickenPrefab: {fileID: 1117322572755230, guid: 165a78498dab15941bd0bdaf3d2a142b,
     type: 2}
+  LosePanel: {fileID: 0}
 --- !u!212 &212603785633519090
 SpriteRenderer:
   m_ObjectHideFlags: 1
