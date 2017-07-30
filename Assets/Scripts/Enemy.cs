@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour {
     private CameraController _cameraController;
     private Vector3 initialPosition;
 
+    private bool enableScreenShake = false;
+
     private void Awake()
     {
         _cameraController = FindObjectOfType<CameraController>();
@@ -31,9 +33,15 @@ public class Enemy : MonoBehaviour {
             transform.position +
             (transform.up * speed * Time.deltaTime);
 
-        _cameraController.shake = 0.5F;
-        _cameraController.shakeAmount =
-            ((marginDistance - (transform.position - initialPosition).magnitude) / marginDistance) * 0.2F;
+        if (enableScreenShake)
+        {
+            _cameraController.shake = 0.5F;
+            _cameraController.shakeAmount =
+                ((marginDistance - (transform.position - initialPosition).magnitude) / marginDistance) * 0.3F;
+        } else
+        {
+            _cameraController.shake = 0;
+        }
     }
 
     public void SetPosition(Vector2 position)
@@ -55,5 +63,16 @@ public class Enemy : MonoBehaviour {
         transform.position =
             transform.position +
             (transform.up * -marginDistance);
+
+        enableScreenShake = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var enemyAttackAliveArea = collision.gameObject.GetComponent<EnemyAttackAliveArea>();
+        if (enemyAttackAliveArea != null)
+        {
+            enableScreenShake = false;
+        }
     }
 }
