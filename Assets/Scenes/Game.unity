@@ -1721,7 +1721,8 @@ AudioSource:
   m_GameObject: {fileID: 1697328337}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243074574080490456, guid: 5c7016376e5a5d145acf57fade731c89,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 33390a4a422778a43863f36a534ba45b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1876,6 +1877,30 @@ Prefab:
       propertyPath: numberOfChickens
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 82016037280260602, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243560382070921348, guid: 5c7016376e5a5d145acf57fade731c89,
+        type: 2}
+    - target: {fileID: 82138314635157208, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243560382070921348, guid: 5c7016376e5a5d145acf57fade731c89,
+        type: 2}
+    - target: {fileID: 82353656971000580, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243560382070921348, guid: 5c7016376e5a5d145acf57fade731c89,
+        type: 2}
+    - target: {fileID: 82044656902353504, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 243560382070921348, guid: 5c7016376e5a5d145acf57fade731c89,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66cdd53ee4ef37a4c91b844850729918, type: 2}
   m_IsPrefabParent: 0
