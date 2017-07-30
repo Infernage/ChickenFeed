@@ -71,10 +71,8 @@ public class ChickenGenerator : MonoBehaviour
     {
         chickens.Remove(sender as GameObject);
 
-        if (!audioSourceDie.isPlaying)
-        {
-            audioSourceDie.PlayOneShot(ListAudiosDying[Random.Range(0, 1)], 0.5f);
-        }
+        if (audioSourceDie.isPlaying) audioSourceDie.Stop();
+        audioSourceDie.PlayOneShot(ListAudiosDying[Random.Range(0, 1)], 0.5f);
 
         if (chickens.Count == 0)
         {
