@@ -125,15 +125,12 @@ public class ChickenAI : MonoBehaviour {
         nextTimeMoving = 0;
 
         GetComponent<Rigidbody2D>().isKinematic = false;
-
-        // TODO: Play animation and sound
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            // TODO: Play sound
             SpawnFeathers(featherWhite);
             SpawnFeathers(featherYellow);
 

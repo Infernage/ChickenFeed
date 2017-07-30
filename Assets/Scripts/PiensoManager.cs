@@ -12,7 +12,7 @@ public class PiensoManager : MonoBehaviour {
     List<GameObject> FeedToDelete;
 
     const int MaximumFeed = 3;
-    int FeedAmount;
+    internal int FeedAmount;
 
     
 
