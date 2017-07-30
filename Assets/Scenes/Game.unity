@@ -1673,7 +1673,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.54509807, g: 0.6117647, b: 0.23529412, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1847,16 +1847,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114030951549662752, guid: 66cdd53ee4ef37a4c91b844850729918,
-        type: 2}
-      propertyPath: attack
-      value: 
-      objectReference: {fileID: 257973008}
-    - target: {fileID: 114682739579202186, guid: 66cdd53ee4ef37a4c91b844850729918,
-        type: 2}
-      propertyPath: LosePanel
-      value: 
-      objectReference: {fileID: 1830925721}
     - target: {fileID: 114060563481955596, guid: 66cdd53ee4ef37a4c91b844850729918,
         type: 2}
       propertyPath: feedsUI.Array.data[0]
@@ -1901,6 +1891,16 @@ Prefab:
       value: 
       objectReference: {fileID: 243560382070921348, guid: 5c7016376e5a5d145acf57fade731c89,
         type: 2}
+    - target: {fileID: 114030951549662752, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 257973008}
+    - target: {fileID: 114682739579202186, guid: 66cdd53ee4ef37a4c91b844850729918,
+        type: 2}
+      propertyPath: LosePanel
+      value: 
+      objectReference: {fileID: 1830925721}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66cdd53ee4ef37a4c91b844850729918, type: 2}
   m_IsPrefabParent: 0
