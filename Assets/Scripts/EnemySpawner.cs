@@ -30,7 +30,8 @@ public class EnemySpawner : MonoBehaviour {
             Invoke("Spawn", Random.Range(minTime, maxTime));
             performInvoke = false;
 
-            audioSourceFox.Stop();
+            if (!GameController.GameFinished)
+                audioSourceFox.PlayOneShot(AudioFox);
         }
     }
 
