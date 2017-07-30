@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RankingManager : MonoBehaviour
 {
@@ -47,6 +48,10 @@ public class RankingManager : MonoBehaviour
         txt.resizeTextForBestFit = true;
         txt.fontStyle = FontStyle.Normal;
         txt.text = text;
+        if (SceneManager.GetActiveScene().name.Equals("Main"))
+        {
+            txt.color = new Color(174f / 255f, 95f / 255f, 29f / 255f);
+        }
         txt.horizontalOverflow = HorizontalWrapMode.Overflow;
     }
 
