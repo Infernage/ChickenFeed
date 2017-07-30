@@ -7,12 +7,11 @@ public class ChickenAI : MonoBehaviour {
 
     public float speed, feedSpeed;
     public Vector2 min, max;
-    public SpriteRenderer sprite; // TODO: Change sprites while moving (?)
     public GameObject featherWhite, featherYellow;
 
     private Vector2 location;
     private float nextTimeMoving, currentTime, distance;
-    private bool isFeed;
+    private bool isFeed, feedReached;
     private Pienso mFeed;
     private Animator animator;
     private float initialXScale;
@@ -27,7 +26,7 @@ public class ChickenAI : MonoBehaviour {
         initialXScale = transform.localScale.x;
         nextTimeMoving = currentTime = 0;
         location = transform.position;
-        isFeed = false;
+        isFeed = feedReached = false;
 	}
 	
 	// Update is called once per frame
@@ -42,15 +41,11 @@ public class ChickenAI : MonoBehaviour {
         }
         else if (isFeed && mFeed.RemainingTime <= 0) // Feed consumed
         {
-            isFeed = false;
+            isFeed = feedReached = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().isKinematic = true;
 
             Recalculate(true);
-        }
-        else if (isFeed)
-        {
-            // TODO: Play feeding animation (?) (use another trigger for range)
         }
 
         animator.SetBool("Eat", isFeed);
@@ -67,7 +62,8 @@ public class ChickenAI : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if (nextTimeMoving <= currentTime && distance >= 0.1F && isFeed)
+        // Feed spotted: Run for your food!
+        if (nextTimeMoving <= currentTime && distance >= 0.1F && isFeed && !feedReached)
         {
             Vector2 vDistance = location - new Vector2(transform.position.x, transform.position.y);
             Vector2 velocity = vDistance.normalized * feedSpeed;
@@ -83,8 +79,9 @@ public class ChickenAI : MonoBehaviour {
         nextTimeMoving = (wasFeed ? UnityEngine.Random.Range(0, 1) : UnityEngine.Random.Range(0, 10)) + currentTime;
         location.x = UnityEngine.Random.Range(min.x, max.x);
         location.y = UnityEngine.Random.Range(min.y, max.y);
-
+        
         animator.SetBool("Running", false);
+        animator.SetBool("Eat", false);
     }
 
     private void RefreshSprite(Vector2 vDistance)
@@ -128,7 +125,7 @@ public class ChickenAI : MonoBehaviour {
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            // TODO: Play animation and sound
+            // TODO: Play sound
             SpawnFeathers(featherWhite);
             SpawnFeathers(featherYellow);
 
@@ -140,8 +137,27 @@ public class ChickenAI : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Pienso feed = other.gameObject.GetComponent<Pienso>();
-        if (feed != null) FeedSpoted(feed);
+        if (other.tag.Equals("Feed"))
+        {
+            Debug.Log("ENTERED");
+            feedReached = true;
+            animator.SetBool("Eat", true);
+        }
+        else
+        {
+            Pienso feed = other.gameObject.GetComponent<Pienso>();
+            if (feed != null) FeedSpoted(feed);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag.Equals("Feed"))
+        {
+            Debug.Log("EXITED");
+            feedReached = false;
+            animator.SetBool("Eat", false);
+        }
     }
 }
 

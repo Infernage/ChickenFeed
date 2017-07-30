@@ -7,6 +7,7 @@ TagManager:
   - Scores
   - Ranking
   - GameTimer
+  - Feed
   layers:
   - Default
   - TransparentFX
