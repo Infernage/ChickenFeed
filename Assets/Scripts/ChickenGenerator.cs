@@ -12,7 +12,7 @@ public class ChickenGenerator : MonoBehaviour
     private GameObject rankingPanel, inputPanel;
 
     AudioSource audioSourceDie, audioSourceRush, audioSourceIDLE;
-    AudioClip AudioRushing, AudioDying, AudioIDLE;
+    AudioClip AudioRushing, AudioDying, AudioIDLE, AudioGameOver;
     List<AudioClip> ListAudiosRushing, ListAudiosDying;
 
     private List<GameObject> chickens;
@@ -47,6 +47,7 @@ public class ChickenGenerator : MonoBehaviour
         ListAudiosDying.Add(Resources.Load("Audio/Gallina dying 2") as AudioClip);
 
         AudioIDLE = Resources.Load("Audio/Gallina IDLE") as AudioClip;
+        AudioGameOver = Resources.Load("Audio/Game over") as AudioClip;
 
         for (int i = 0; i < numberOfChickens; i++)
         {
@@ -79,6 +80,12 @@ public class ChickenGenerator : MonoBehaviour
         {
             GameController.GameFinished = true;
             GameObject.Find("Canvas/GameTimer").GetComponent<GameTimer>().StopTimer();
+
+            //Play game over sound && idle low volume
+            audioSourceRush.PlayOneShot(AudioGameOver, 0.5f);
+            audioSourceIDLE.PlayOneShot(AudioIDLE, 0.1f);
+            audioSourceDie.Stop();
+
             inputPanel.SetActive(true);
         }
     }
@@ -86,9 +93,12 @@ public class ChickenGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!audioSourceIDLE.isPlaying && chickens.Count > 0)
+        if (!audioSourceIDLE.isPlaying)
         {
-            audioSourceIDLE.PlayOneShot(AudioIDLE, 0.2f);
+            if(GameController.GameFinished)
+                audioSourceIDLE.PlayOneShot(AudioIDLE, 0.2f);
+            else
+                audioSourceIDLE.PlayOneShot(AudioIDLE, 0.6f);
         }
     }
 }

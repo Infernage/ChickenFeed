@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour {
         performInvoke = false;
         attack.stopped += Attack_stopped;
 
-        AudioFox = Resources.Load("Audio/Zorro Rusing") as AudioClip;
+        AudioFox = Resources.Load("Audio/Zorro Rushing") as AudioClip;
         audioSourceFox = GetComponents<AudioSource>()[3];
         audioSourceFox.clip = AudioFox;
     }
@@ -49,7 +49,8 @@ public class EnemySpawner : MonoBehaviour {
             attack.Run();
             Invoke("Spawn", Random.Range(minTime, maxTime));
 
-            //audioSourceFox.PlayDelayed(1);
+            if(!GameController.GameFinished)
+                audioSourceFox.Play();
         }
         else
         {
