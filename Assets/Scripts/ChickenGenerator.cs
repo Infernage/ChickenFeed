@@ -83,7 +83,7 @@ public class ChickenGenerator : MonoBehaviour
 
             //Play game over sound && idle low volume
             audioSourceRush.PlayOneShot(AudioGameOver, 0.5f);
-            audioSourceIDLE.PlayOneShot(AudioIDLE, 0.1f);
+            audioSourceIDLE.PlayOneShot(AudioIDLE, 0.05f);
             audioSourceDie.Stop();
 
             inputPanel.SetActive(true);
@@ -95,7 +95,7 @@ public class ChickenGenerator : MonoBehaviour
     {
         if (!audioSourceIDLE.isPlaying)
         {
-            if(GameController.GameFinished)
+            if (GameController.GameFinished)
                 audioSourceIDLE.PlayOneShot(AudioIDLE, 0.2f);
             else
                 audioSourceIDLE.PlayOneShot(AudioIDLE, 0.6f);
