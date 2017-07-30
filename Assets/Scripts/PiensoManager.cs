@@ -32,8 +32,8 @@ public class PiensoManager : MonoBehaviour {
             //Pienso FeedPointer = gameObject.AddComponent<Pienso>();
 
            GameObject FeedPointer =  Instantiate(pruebaPrefab,InitialLocation,Quaternion.identity);
-            FeedPointer.GetComponent<Pienso>().Location = InitialLocation;
-            FeedPointer.GetComponent<Pienso>().Start();
+            FeedPointer.GetComponentInChildren<Pienso>().Location = InitialLocation;
+            FeedPointer.GetComponentInChildren<Pienso>().Start();
             
             //pruebaPrefab.Location = InitialLocation;
             FeedList.Add(FeedPointer);
@@ -51,7 +51,7 @@ public class PiensoManager : MonoBehaviour {
         //Check if feed has no time remaining
         foreach(GameObject item in FeedList)
         {
-            if(item.GetComponent<Pienso>().RemainingTime<=0.0f)
+            if(item.GetComponentInChildren<Pienso>().RemainingTime<=0.0f)
                 FeedToDelete.Add(item);
 
             //Debug.Log(item.GetComponent<Pienso>().RemainingTime);

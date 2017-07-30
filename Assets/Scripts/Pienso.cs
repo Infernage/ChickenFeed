@@ -51,11 +51,4 @@ public class Pienso : MonoBehaviour {
         //GC logic
         FeedSpriteRender.enabled = false;
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Trigger entered!");
-        ChickenAI ai = other.GetComponentInParent<ChickenAI>();
-        ai.FeedSpoted(this);
-    }
 }
