@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ff3bb0c989f574bb53af145d7a8c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FeedLifeTime: 5
+  FeedLifeTime: 2
   RemainingTime: 0
   TimePercToDissapear: 0.5
   Location: {x: 0, y: 0}
