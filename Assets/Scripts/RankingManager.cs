@@ -18,7 +18,7 @@ public class RankingManager : MonoBehaviour
         LoadRankingUI();
     }
 
-    private void LoadRankingUI()
+    public void LoadRankingUI()
     {
         foreach (Transform child in scores.transform)
         {
@@ -77,8 +77,8 @@ public class RankingManager : MonoBehaviour
     public void InsertNewScore(string name, string time, float timer)
     {
         Ranking newRank = new Ranking();
-        newRank.Name = name;
-        newRank.Time = time;
+        newRank.Name = !string.IsNullOrEmpty(name) ? name : string.Empty;
+        newRank.Time = !string.IsNullOrEmpty(time) ? time : string.Empty;
         newRank.Timer = timer;
         if (rankings == null)
         {
@@ -94,7 +94,5 @@ public class RankingManager : MonoBehaviour
             rankings = rankings.OrderByDescending(o => o.Timer).Take(5).ToList();
         }
         Save();
-        Load();
-        LoadRankingUI();
     }
 }
